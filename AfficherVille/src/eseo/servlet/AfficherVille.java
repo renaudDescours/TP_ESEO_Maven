@@ -37,6 +37,7 @@ public class AfficherVille extends HttpServlet {
 			
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM ville_france where Code_postal = 45100");
 			while(resultSet.next()){
+				System.out.println(" ");
 		        System.out.println("nom commune : " + resultSet.getString("Nom_commune") );
 				
 			}
