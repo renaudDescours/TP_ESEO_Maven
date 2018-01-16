@@ -40,6 +40,8 @@ public class VilleDisplay {
 	    }catch (Exception e){
 	      System.err.println("Got an exception! ");
 	      System.err.println(e.getMessage());
+
+		  throw new RuntimeException(e);
 	    }
 	
 	}
