@@ -26,7 +26,7 @@ public class VilleDisplay {
 	      int columnsNumber = rsmd.getColumnCount();
 	      // iterate through the java resultset
 
-		  System.out.println("bloblo");
+		  System.out.println("puuush");
 	      while (rs.next())
 	      {
 	    	  for(int i = 1 ; i <= columnsNumber; i++){
