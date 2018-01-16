@@ -18,27 +18,32 @@
     />
      
     <sql:query var="listVille"   dataSource="${myDS}">
-        SELECT * FROM ville_france;
+        SELECT * FROM ville_france LIMIT 100;
     </sql:query>
      
+      <form name="form1" method="post" action="DistanceVille">
     <div align="center">
         <table border="1" cellpadding="5">
             <caption><h2>List of ville</h2></caption>
             <tr>
                 <th>Code_commune</th>
                 <th>Nom_commune</th>
-                <th>Code_postal</th>
-                <th>Libelle_acheminement</th>
+                <th>Select</th>
             </tr>
             <c:forEach var="ville" items="${listVille.rows}">
                 <tr>
                     <td><c:out value="${ville.Code_commune_INSEE}" /></td>
                     <td><c:out value="${ville.Nom_commune}" /></td>
-                    <td><c:out value="${ville.Code_postal}" /></td>
-                    <td><c:out value="${ville.Libelle_acheminement}" /></td>
+                    <td><input type="checkbox" id="radioButtonVille" value="${ville.Code_postal}">
+                    	<input type="hidden" id="lat" name="lat" value="${ville.Latitude}">
+                    	<input type="hidden" id="lng" name="lng" value="${ville.Longitude}"></td>
                 </tr>
             </c:forEach>
         </table>
+        <button type="submit">Valider</button>
     </div>
+    </form>
 </body>
+
+
 </html>

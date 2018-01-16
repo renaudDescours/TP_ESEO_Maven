@@ -2,48 +2,22 @@ package eseo.servlet;
 import java.sql.*;
 
 public class VilleDisplay {
-	private static void main(String[] args){
-		
-	    try{
-	    	
-	      // create our mysql database connection
-	      String myDriver = "com.mysql.jdbc.Driver";
-	      String ip = "127.0.0.1";
-	      String myUrl = "jdbc:mysql://"+ip+"/eseo_tp_maven?useSSL=false";
-	      Class.forName(myDriver);
-	      Connection conn = DriverManager.getConnection(myUrl, "maven", "network");
-	      
-	      // our SQL SELECT query. 
-	      // if you only need a few columns, specify them by name instead of using "*"
-	      String query = "SELECT * FROM ville_france";
-
-	      // create the java statement
-	      Statement st = conn.createStatement();
-	      
-	      // execute the query, and get a java resultset
-	      ResultSet rs = st.executeQuery(query);
-	      ResultSetMetaData rsmd = rs.getMetaData();
-	      
-	      int columnsNumber = rsmd.getColumnCount();
-	      // iterate through the java resultset
-
-	      while (rs.next())
-	      {
-	    	  for(int i = 1 ; i <= columnsNumber; i++){
-	    		  System.out.print(rs.getString(i) + " ");
-	        
-	        // print the results
-	    	  }
-	    	  System.out.println();//
-	      }
-	      st.close();
-	    }catch (Exception e){
-	      System.err.println("Got an exception! ");
-	      System.err.println(e.getMessage());
-
-		  throw new RuntimeException(e);
-	    }
 	
+	
+	public double getDistance(double lat1, double lng1, double lat2, double lng2) {
+		double earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
+		double rlo1 = deg2rad(lng1);    // CONVERSION
+		double rla1 = deg2rad(lat1);
+		double rlo2 = deg2rad(lng2);
+		double rla2 = deg2rad(lat2);
+		double dlo = (rlo2 - rlo1) / 2;
+		double dla = (rla2 - rla1) / 2;
+		double a = (Math.sin(dla) * Math.sin(dla)) + Math.cos(rla1) * Math.cos(rla2) * (Math.sin(dlo) * Math.sin(dlo));
+		double d = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		return (earth_radius * d)/1000;
 	}
-	  
+	
+	double deg2rad(double x){
+		return Math.PI*x/180.0;
+	}
 }
