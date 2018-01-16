@@ -2,13 +2,14 @@ package eseo.servlet;
 import java.sql.*;
 
 public class VilleDisplay {
-	public static void main(String[] args){
+	private static void main(String[] args){
 		
 	    try{
 	    	
 	      // create our mysql database connection
 	      String myDriver = "com.mysql.jdbc.Driver";
-	      String myUrl = "jdbc:mysql://127.0.0.1/eseo_tp_maven?useSSL=false";
+	      String ip = "127.0.0.1";
+	      String myUrl = "jdbc:mysql://"+ip+"/eseo_tp_maven?useSSL=false";
 	      Class.forName(myDriver);
 	      Connection conn = DriverManager.getConnection(myUrl, "maven", "network");
 	      
@@ -26,7 +27,6 @@ public class VilleDisplay {
 	      int columnsNumber = rsmd.getColumnCount();
 	      // iterate through the java resultset
 
-		  System.out.println("puuush");
 	      while (rs.next())
 	      {
 	    	  for(int i = 1 ; i <= columnsNumber; i++){
